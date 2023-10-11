@@ -1,0 +1,8 @@
+### Test endpoint
+POST {{base_url}}/kyc/aadhaar/test
+#Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "transID":"12345"
+}

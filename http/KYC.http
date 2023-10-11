@@ -1,0 +1,9 @@
+### Test endpoint
+POST {{base_url}}/kyc/pan
+#Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "transID":"12345",
+  "docNumber": "BWQPR7248G"
+}

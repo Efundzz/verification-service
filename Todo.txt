@@ -1,0 +1,10 @@
+1. Refactor KYCController from business layer
+2. Make changes to fetch the Authbridge key and iv from application.properties
+3. Add validations for requestbody
+4. Error handling using controllerAdvice
+5. Testcases
+6. To create seperate repo for database connectivity and segregate database layer
+7. Document each and every method
+8. Push encrypted data to database and while fetching decrypt it
+9. Enable security
+10. check logs for any sensitive data

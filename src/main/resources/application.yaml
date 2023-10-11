@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://terraform-20230416163607232400000001.chlnsunhgm7o.eu-west-1.rds.amazonaws.com:5432/efundzz
+    username: efundzz_admin
+    password: efundzz123!
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibername:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  cloud:
+    openfeign:
+      client:
+        config:
+          authBridge:
+            default-request-headers:
+              username: prodefundz@fintelle.com
+server:
+  port: 8090
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
