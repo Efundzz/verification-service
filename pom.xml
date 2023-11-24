@@ -79,6 +79,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.5.5.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.5.5.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>com.efundzz</groupId>
 			<artifactId>db-connect</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -89,6 +101,11 @@
 			<artifactId>spock-core</artifactId>
 			<version>2.3-groovy-4.0</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.orm</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>6.2.9.Final</version>
 		</dependency>
 	</dependencies>
 

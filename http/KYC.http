@@ -7,3 +7,36 @@ Content-Type: application/json
   "transID":"12345",
   "docNumber": "BWQPR7248G"
 }
+
+
+
+//Signzy Aadhar test endpoint
+POST {{base_url}}/signzy/creditReport
+{
+"essentials": { "uid": "219388519632"}
+}
+
+//Pan Aadhar Linked Status
+POST {{base_url}}/signzy/panAadharLink
+{
+"essentials": {
+           "number":"ghkpp5108m",
+           "uid": "219388519632"
+      }
+}
+
+//Decentro credit report
+POST {{base_url}}/signzy/creditReport
+{
+  "reference_id": "tro0012978999888",
+    "name": "akshay p",
+    "mobile": "7411643877"
+}
+
+//Signzy Email Validation
+POST {{base_url}}/signzy/email
+{
+"essentials": {
+        "emailId": "dhanunjaypaila@gmail.com"
+        }
+}
