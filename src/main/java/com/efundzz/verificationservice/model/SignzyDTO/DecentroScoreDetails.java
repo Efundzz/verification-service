@@ -15,4 +15,44 @@ public class DecentroScoreDetails {
     private String name;
     private String value;
     private ArrayList<DecentroScoringElements> scoringElements;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public ArrayList<DecentroScoringElements> getScoringElements() {
+        return scoringElements;
+    }
+
+    public void setScoringElements(ArrayList<DecentroScoringElements> scoringElements) {
+        this.scoringElements = scoringElements;
+    }
 }

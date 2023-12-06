@@ -19,4 +19,7 @@ public class KycRequestDTO {
     private String docType;
     @NotBlank(message = "docNumber cannot be null")
     private String docNumber;
+    @NotBlank(message = "docNumber cannot be null")
+    private String docNumber1;
+
 }

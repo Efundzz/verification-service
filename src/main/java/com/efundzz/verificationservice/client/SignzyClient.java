@@ -1,6 +1,8 @@
 package com.efundzz.verificationservice.client;
 
+import com.efundzz.verificationservice.model.GenericApiResponse;
 import com.efundzz.verificationservice.model.SignzyDTO.*;
+import com.efundzz.verificationservice.model.authbridge.AuthbridgeDecryptedResponseDTO;
 import com.efundzz.verificationservice.model.authbridge.AuthbridgeEncryptedRequestDTO;
 import com.efundzz.verificationservice.model.authbridge.AuthbridgeEncryptedResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -29,7 +31,6 @@ public interface SignzyClient {
     EmailResponse VerifyEmail(@RequestBody EmailRequest emailRequest,@RequestHeader(HttpHeaders.AUTHORIZATION) String token);
 
     @PostMapping("/patrons/650bb98d09e2f4003ee88ae6/panv2")
-    AuthbridgeEncryptedResponseDTO signzyPan(@RequestBody AuthbridgeEncryptedRequestDTO authbridgeEncryptedRequestDTO);
-    @PostMapping("/patrons/650bb98d09e2f4003ee88ae6/panv2")
     PanResponse signzyPan(PanRequest panRequest, @RequestHeader(HttpHeaders.AUTHORIZATION) String token);
+
 }

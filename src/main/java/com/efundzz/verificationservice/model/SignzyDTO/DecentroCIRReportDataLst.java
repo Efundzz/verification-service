@@ -9,4 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DecentroCIRReportDataLst {
     private DecentroCIRReportData cIRReportData;
+
+    public DecentroCIRReportData getcIRReportData() {
+        return cIRReportData;
+    }
+
+    public void setcIRReportData(DecentroCIRReportData cIRReportData) {
+        this.cIRReportData = cIRReportData;
+    }
 }

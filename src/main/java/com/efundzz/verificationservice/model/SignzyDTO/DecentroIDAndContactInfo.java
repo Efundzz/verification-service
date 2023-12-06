@@ -13,4 +13,36 @@ public class DecentroIDAndContactInfo {
     private DecentroIdentityInfo identityInfo;
     private List<DecentroAddressInfo> addressInfo;
     private List<DecentroPhoneInfo> phoneInfo;
+
+    public DecentroPersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
+
+    public void setPersonalInfo(DecentroPersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
+
+    public DecentroIdentityInfo getIdentityInfo() {
+        return identityInfo;
+    }
+
+    public void setIdentityInfo(DecentroIdentityInfo identityInfo) {
+        this.identityInfo = identityInfo;
+    }
+
+    public List<DecentroAddressInfo> getAddressInfo() {
+        return addressInfo;
+    }
+
+    public void setAddressInfo(List<DecentroAddressInfo> addressInfo) {
+        this.addressInfo = addressInfo;
+    }
+
+    public List<DecentroPhoneInfo> getPhoneInfo() {
+        return phoneInfo;
+    }
+
+    public void setPhoneInfo(List<DecentroPhoneInfo> phoneInfo) {
+        this.phoneInfo = phoneInfo;
+    }
 }

@@ -9,4 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DecentroData {
     private DecentroCCRResponse cCRResponse;
+
+    public DecentroCCRResponse getcCRResponse() {
+        return cCRResponse;
+    }
+
+    public void setcCRResponse(DecentroCCRResponse cCRResponse) {
+        this.cCRResponse = cCRResponse;
+    }
 }

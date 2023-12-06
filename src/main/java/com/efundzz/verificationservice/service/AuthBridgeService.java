@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class AuthBridgeService {
             persistenceService.saveAuditLog(transId, step.getValue(), mapper.writeValueAsString(request), "REQUEST", false);
             log.info("Request sent for {}, transaction id- {} : {}", step.getValue(), transId, mapper.writeValueAsString(request));
             //TODO: Commented out the api call to prevent api calls during local testing
-//            encryptedResponse = abFunction.call();
+            encryptedResponse = abFunction.call();
             log.info("Received response for {},transaction id- {}", step.getValue(), transId);
             log.debug("Step - {}, transaction id - {}, encryptedResponse - {}", step.getValue(), transId, encryptedResponse);
 

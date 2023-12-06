@@ -15,3 +15,4 @@ public class DecentroRequest {
     private String mobile;
     private String inquiry_purpose;
 }
+

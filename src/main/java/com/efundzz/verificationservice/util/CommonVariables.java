@@ -31,4 +31,5 @@ public class CommonVariables {
     public static final String Decentro_Inquiry_Purpose = "PL";
     public static final Boolean Decentro_consent = true;
     public static final String Decentro_ConsentPurpose = "for bank verification only";
+
 }

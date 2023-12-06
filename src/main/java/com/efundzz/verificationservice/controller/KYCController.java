@@ -1,12 +1,13 @@
 package com.efundzz.verificationservice.controller;
 
+import com.efundzz.verificationservice.ErrorHandling.InvalidRequestException;
 import com.efundzz.verificationservice.client.AuthBridgeClient;
-import com.efundzz.verificationservice.mapper.PanMapper;
 import com.efundzz.verificationservice.model.CibilScoreRequestDTO;
 import com.efundzz.verificationservice.model.EquifaxScoreRequestDTO;
 import com.efundzz.verificationservice.model.GenericApiResponse;
 import com.efundzz.verificationservice.model.IDSearchRequestDTO;
 import com.efundzz.verificationservice.model.SignzyDTO.PanResponse;
+import com.efundzz.verificationservice.model.SignzyDTO.PanResultMap;
 import com.efundzz.verificationservice.model.authbridge.AuthbridgeDecryptedResponseDTO;
 import com.efundzz.verificationservice.model.authbridge.AuthbridgeEncryptedRequestDTO;
 import com.efundzz.verificationservice.model.authbridge.AuthbridgeEncryptedResponseDTO;
@@ -17,6 +18,7 @@ import com.efundzz.verificationservice.service.KYCService;
 import com.efundzz.verificationservice.util.AesCbcCrypto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,16 +31,14 @@ public class KYCController {
 
     private KYCService kycService;
     private AuthBridgeClient authBridgeClient;
-    private PanMapper panMapper;
     ObjectMapper mapper = new ObjectMapper();
 
     String key = "R@za#401";
     String iv = AesCbcCrypto.getIV();
 
-    public KYCController(KYCService kycService, AuthBridgeClient authBridgeClient,PanMapper panMapper) {
+    public KYCController(KYCService kycService, AuthBridgeClient authBridgeClient) {
         this.kycService = kycService;
         this.authBridgeClient = authBridgeClient;
-        this.panMapper = panMapper;
     }
 
     @PostMapping("/pan")
@@ -51,34 +51,31 @@ public class KYCController {
         return ResponseEntity.ok(response.getData());
     }
 
-    //Signzy Pan Api
     @PostMapping("/signzy/pan")
-    public ResponseEntity<AuthbridgeDecryptedResponseDTO<PanResponse>> getPanNumber1(@RequestBody IDSearchRequestDTO panRequestDTO) {
-        // use open feign to call the KYC service
-        // pass the PAN number as a request body
-        GenericApiResponse<AuthbridgeDecryptedResponseDTO> response = kycService.fetchPanDetails(panRequestDTO);
+    public ResponseEntity<PanResultMap> getPanNumber1(@RequestBody IDSearchRequestDTO panRequestDTO) {
+            // use open feign to call the KYC service
+            // pass the PAN number as a request body
+            PanResponse response = kycService.panValidation(panRequestDTO);
 
-        if (1 != response.getStatus()) { throw new RuntimeException(response.getMessage()); }
-        AuthbridgeDecryptedResponseDTO<PanResponse> mappedResponse = panMapper.mapToAuthbridgeResponse((PanResponse) response.getData().getMsg());
 
-        return ResponseEntity.ok(mappedResponse);
+            PanResultMap mapped = new PanResultMap();
+
+            mapped.setFirstName(response.getResult().getFirstName());
+            mapped.setMiddleName(response.getResult().getMiddleName());
+            mapped.setLastName(response.getResult().getLastName());
+            mapped.setPanNumber(response.getResult().getNumber());
+            mapped.setNameOnTheCard(response.getResult().getName());
+            mapped.setLastUpdate(response.getResult().getLastUpdatedOn());
+            mapped.setStatus(response.getResult().getPanStatus());
+            mapped.setStatusDescription(response.getResult().getPanStatus());
+            mapped.setPanHolderStatusType(response.getResult().isIndividual());
+            System.out.println(response.getResult().getPanStatus());
+
+        if ( response == null) {
+            throw new InvalidRequestException("Pan Response is null.");
+        }else return ResponseEntity.ok(mapped);
     }
-//    @PostMapping("/sigPan")
-//    public ResponseEntity<AuthbridgeDecryptedResponseDTO<PanResponse>> getPanNumber2(@RequestBody IDSearchRequestDTO panRequestDTO) {
-//        // use open feign to call the KYC service
-//        // pass the PAN number as a request body
-//        GenericApiResponse<AuthbridgeDecryptedResponseDTO> response = kycService.fetchPanDetails(panRequestDTO);
-//
-//        if (1 != response.getStatus()) { throw new RuntimeException(response.getMessage()); }
-//      //  AuthbridgeDecryptedResponseDTO<PanResponse> mappedResponse = panMapper.mapToAuthbridgeResponse((PanResponse) response.getData().getMsg());
-//
-//        return ResponseEntity.ok(response.getData());
-//    }
-    //Signzy Pan Api without merge
-    @PostMapping("/signzyPan")
-    public PanResponse panValidation(@RequestBody IDSearchRequestDTO panRequestDTO) {
-        return kycService.panValidation(panRequestDTO);
-    }
+
 
     @PostMapping("/advance_pan")
     public ResponseEntity<AuthbridgeDecryptedResponseDTO> getAdvancedPAN(@RequestBody AdvancedPANRequestDTO panRequestDTO) {

@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @FeignClient(name = "authBridge", url = "https://www.truthscreen.com", configuration = FeignConfig.class)
 public interface AuthBridgeClient {
-
     @PostMapping("/api/v2.2/idsearch")
     AuthbridgeEncryptedResponseDTO idSearch(@RequestBody AuthbridgeEncryptedRequestDTO authbridgeEncryptedRequestDTO);
-
     @PostMapping("/PanVerification/request")
     AuthbridgeEncryptedResponseDTO verifyAdvancedPan(@RequestBody AuthbridgeEncryptedRequestDTO authbridgeEncryptedRequestDTO);
 

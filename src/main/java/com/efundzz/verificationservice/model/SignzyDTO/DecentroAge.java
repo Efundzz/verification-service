@@ -9,4 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DecentroAge {
     private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 }

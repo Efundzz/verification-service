@@ -11,3 +11,4 @@ public class PanRequest {
     private String task;
     private Essentials essentials;
 }
+

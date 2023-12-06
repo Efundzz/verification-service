@@ -25,13 +25,12 @@ public class KYCService {
         this.panService = panService;
         this.signzyClient = signzyClient;
     }
-    //signzy pan validation
     public PanResponse panValidation(IDSearchRequestDTO panRequestDTO) {
         PanRequest panRequest = new PanRequest();
         Essentials essentials = new Essentials();
         panRequest.setTask("fetch");
+        essentials.setNumber(panRequestDTO.getDocNumber());
         panRequest.setEssentials(essentials);
-        essentials.setNumber(panRequestDTO.getDocNumber());;
 
         return signzyClient.signzyPan(panRequest, CommonVariables.panAuth);
     }
